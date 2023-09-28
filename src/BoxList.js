@@ -1,41 +1,47 @@
+import {useState} from "react"
 import Box from "./Box";
 import NewBoxForm from "./NewBoxForm";
 import {v4 as uuid} from "uuid";
 
 function BoxList() {
-  const [boxes, setBoxes] = useState([]);
+  const [boxes, setBoxes] = useState([{id:"123",height:"20",width:"20",backgroundColor:"red"}]);
   //boxes will look like:
-  [{width: 1, height: 1, backgroundColor: 'red'}]
+
   //function to add to Boxes
-  function addBox(){
-    //this will have setBoxes do something.
+  function addBox(box){
+    console.log("box inside addBox()", box)
+    let newBox = { ...box, id: uuid() };
+    setBoxes(boxes => [...boxes, newBox]);
 
-    //in this addbox, make sure to add key with uuid.
   }
 
+  //removes box based on matching key
   function removeBox(key){
-    //loop through boxes state, checking which box has key = key
-  }
+    setBoxes(oldBoxes => oldBoxes.filter(box => box.id !== key))
+
+    }
 
   //function that will map over boxes and return a JSX array
   function makeboxesJSX(){
     //this should make elements like: ...boxes[i], }
     let newBoxes = boxes.map(box => {
-      <Box
+     const newBox = <Box
       key={box.key}
       width={box.width}
       height={box.height}
       backgroundColor={box.backgroundColor}
       removeBox = {removeBox}
     />
+    return newBox
     })
     return newBoxes;
   }
 
+  console.log("makeboxesJSX()", makeboxesJSX())
   return (
     <div className="BoxList">
-      {makeboxesJSX()}
       <NewBoxForm addBox={addBox}/>
+      {makeboxesJSX()}
     </div>
   );
 }

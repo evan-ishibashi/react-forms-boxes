@@ -6,7 +6,7 @@ function Box({ key, height, width, backgroundColor, removeBox }) {
     removeBox(key);
   }
 
-  const boxStyle = { height, width, backgroundColor };
+  const boxStyle = { height:height + "px", width:width + "px", backgroundColor, marginTop:"20px"};
   return (
     <>
       <div className="Box" style={boxStyle}></div>
