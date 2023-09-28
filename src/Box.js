@@ -1,9 +1,9 @@
 
 
-function Box({ key, height, width, backgroundColor, removeBox }) {
+function Box({ id, height, width, backgroundColor, removeBox }) {
 
   function handleRemove() {
-    removeBox(key);
+    removeBox(id);
   }
 
   const boxStyle = { height:height + "px", width:width + "px", backgroundColor, marginTop:"20px"};
